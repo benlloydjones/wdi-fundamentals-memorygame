@@ -53,7 +53,33 @@ var flipCard = function () {
   }
 }
 
+function getRandomInt(min, max) {
+  min = Math.ceil(min);
+  max = Math.floor(max);
+  return Math.floor(Math.random() * (max - min)) + min;
+}
+
+//I've added the below in because I thought it
+//it would be more fun to have randomised card placement
 var createBoard = function() {
+    var possibles = [];
+    console.log(possibles)
+    for (var i = 0; i < cards.length; i++) {
+        possibles.push(i);
+        console.log(possibles)
+    }
+    console.log(possibles)
+  for (var i = 0; i < cards.length; i++) {
+        var cardNumber = possibles.splice(getRandomInt(0, possibles.length), 1);
+    var cardElement = document.createElement('img');
+    cardElement.setAttribute('src', 'images/back.png');
+    cardElement.setAttribute('data-id', cardNumber);
+    cardElement.addEventListener('click', flipCard);
+    document.getElementById('game-board').appendChild(cardElement);
+    }
+}
+
+/*var createBoard = function() {
 	for (var i = 0; i < cards.length; i++) {
 		var cardElement = document.createElement('img');
 		cardElement.setAttribute('src', 'images/back.png');
@@ -61,7 +87,7 @@ var createBoard = function() {
 		cardElement.addEventListener('click', flipCard);
 		document.getElementById('game-board').appendChild(cardElement);
 	}
-}
+}*/
 
 var resetBoard = function() {
   theBoard = document.getElementById('game-board');
